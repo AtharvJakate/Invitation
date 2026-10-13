@@ -1,0 +1,1212 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aditi & Atharv — Modern Editorial Wedding Experience</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Playfair Display, Plus Jakarta Sans, Syne, Caveat -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        obsidian: '#0B0C10',
+                        cream: '#F9F8F6',
+                        rosegold: '#E0A96D',
+                        champagne: '#D4AF37',
+                        champagneLight: '#F3E5AB',
+                        glassBg: 'rgba(255, 255, 255, 0.03)',
+                        glassBorder: 'rgba(224, 169, 109, 0.25)'
+                    },
+                    fontFamily: {
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Syne', 'sans-serif'],
+                        handwriting: ['Caveat', 'cursive']
+                    },
+                    boxShadow: {
+                        'rosegold-glow': '0 0 30px rgba(224, 169, 109, 0.25)',
+                        'hud-card': '0 25px 50px -12px rgba(0, 0, 0, 0.85)'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0B0C10;
+            color: #F9F8F6;
+            overflow-x: hidden;
+        }
+
+        .gradient-mesh {
+            background: radial-gradient(circle at 15% 15%, rgba(224, 169, 109, 0.12) 0%, transparent 45%),
+                        radial-gradient(circle at 85% 80%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
+                        radial-gradient(circle at 50% 50%, rgba(11, 12, 16, 1) 0%, #050507 100%);
+        }
+
+        .apple-glass {
+            background: rgba(18, 20, 26, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(224, 169, 109, 0.2);
+        }
+
+        .apple-glass-light {
+            background: rgba(249, 248, 246, 0.05);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(249, 248, 246, 0.12);
+        }
+
+        .rosegold-gradient-text {
+            background: linear-gradient(135deg, #FFF1E0 0%, #E0A96D 50%, #B87B3B 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* 3D Tilt Card Effects */
+        .tilt-card {
+            transform-style: preserve-3d;
+            transition: transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        /* Image Filters for Masonry */
+        .filter-editorial { filter: contrast(1.08) saturate(1.1) brightness(1.02); }
+        .filter-bw { filter: grayscale(100%) contrast(1.2); }
+        .filter-warm { filter: sepia(30%) saturate(1.2) hue-rotate(-10deg); }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: #0B0C10; }
+        ::-webkit-scrollbar-thumb { background: #E0A96D; border-radius: 9999px; }
+
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-12px) rotate(1deg); }
+        }
+        .animate-float { animation: floatSlow 6s ease-in-out infinite; }
+
+        /* Cartoon Couple Animation Keyframes */
+        @keyframes cartoonSway {
+            0%, 100% { transform: rotate(-2deg) translateY(0px); }
+            50% { transform: rotate(2deg) translateY(-8px); }
+        }
+        @keyframes cartoonBlink {
+            0%, 90%, 100% { transform: scaleY(1); }
+            95% { transform: scaleY(0.1); }
+        }
+        @keyframes heartFloat {
+            0% { opacity: 1; transform: translateY(0px) scale(0.8) rotate(0deg); }
+            100% { opacity: 0; transform: translateY(-90px) scale(1.4) rotate(15deg); }
+        }
+        
+        .anim-cartoon-sway { animation: cartoonSway 4s ease-in-out infinite; }
+        .anim-cartoon-blink { transform-origin: center; animation: cartoonBlink 3.5s infinite; }
+        .floating-heart-particle { animation: heartFloat 2s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+
+        /* Dance state overrides */
+        .dance-active { animation: cartoonSway 0.8s ease-in-out infinite !important; }
+    </style>
+</head>
+<body class="gradient-mesh font-sans antialiased selection:bg-rosegold selection:text-obsidian">
+
+    <!-- Interactive Canvas for Cursor Trail & Audio Visualizer -->
+    <canvas id="bgCanvas" class="fixed inset-0 pointer-events-none z-10"></canvas>
+
+    <!-- FLOATING TOP NAVIGATION HUD -->
+    <header class="fixed top-6 left-1/2 -translate-x-1/2 z-40 w-[94%] max-w-6xl">
+        <div class="apple-glass rounded-full px-5 sm:px-6 py-3.5 flex items-center justify-between shadow-hud-card border border-rosegold/30">
+            <!-- Brand Mark -->
+            <a href="#hero" class="font-display text-sm tracking-[0.25em] font-bold rosegold-gradient-text uppercase">
+                A & A <span class="text-[10px] text-cream/50 ml-1 font-sans tracking-normal hidden sm:inline">• 2027</span>
+            </a>
+
+            <!-- Nav Links -->
+            <nav class="hidden lg:flex items-center space-x-7 text-xs font-medium uppercase tracking-widest text-cream/80">
+                <a href="#cartoon-couple" class="hover:text-rosegold transition-colors flex items-center gap-1.5 text-rosegold">
+                    <i class="fa-solid fa-[#FF69B4] fa-heart text-xs animate-pulse"></i> Cartoon Avatars
+                </a>
+                <a href="#story" class="hover:text-rosegold transition-colors">Story</a>
+                <a href="#surprise" class="hover:text-rosegold transition-colors flex items-center gap-1.5">
+                    <i class="fa-solid fa-gift text-xs text-rosegold"></i> Bride's Vault
+                </a>
+                <a href="#gallery" class="hover:text-rosegold transition-colors">Moments</a>
+                <a href="#itinerary" class="hover:text-rosegold transition-colors">Itinerary</a>
+                <a href="#venue" class="hover:text-rosegold transition-colors">Venue</a>
+            </nav>
+
+            <!-- Action Controls -->
+            <div class="flex items-center space-x-2.5">
+                <!-- Photo Manager Button -->
+                <button onclick="openPhotoUploaderModal()" class="px-3.5 py-2 rounded-full apple-glass-light border border-rosegold/40 text-rosegold hover:bg-rosegold hover:text-obsidian flex items-center space-x-1.5 text-xs font-mono transition-all shadow-rosegold-glow" title="Upload Custom Photos">
+                    <i class="fa-solid fa-camera"></i>
+                    <span class="hidden sm:inline">Upload Photos</span>
+                </button>
+
+                <!-- Soundscape Toggle -->
+                <button id="soundToggleBtn" onclick="toggleAudioSoundscape()" class="group relative px-3 py-2 rounded-full apple-glass-light border border-rosegold/30 text-rosegold hover:border-rosegold flex items-center space-x-2 text-xs transition-all" title="Toggle Romantic Piano Ambient">
+                    <div id="visBars" class="flex items-end space-x-0.5 h-3">
+                        <span class="w-0.5 h-2 bg-rosegold rounded-full"></span>
+                        <span class="w-0.5 h-3 bg-rosegold rounded-full"></span>
+                        <span class="w-0.5 h-1.5 bg-rosegold rounded-full"></span>
+                    </div>
+                    <span id="soundStatusText" class="hidden xl:inline font-mono text-[10px] tracking-wider uppercase">Sound OFF</span>
+                </button>
+
+                <!-- Quick RSVP Button -->
+                <a href="#rsvp" class="px-4 py-2 rounded-full bg-rosegold text-obsidian font-semibold text-xs tracking-wider uppercase hover:bg-champagneLight transition-all shadow-rosegold-glow">
+                    RSVP
+                </a>
+
+                <!-- Customizer Gear Button -->
+                <button onclick="openSettingsModal()" class="p-2 rounded-full apple-glass-light border border-rosegold/30 text-rosegold hover:text-white transition-colors" title="Edit Celebration Details">
+                    <i class="fa-solid fa-sliders text-xs"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section id="hero" class="relative min-h-screen pt-36 pb-20 px-4 flex flex-col items-center justify-center text-center overflow-hidden">
+        <div class="relative z-20 max-w-4xl mx-auto flex flex-col items-center">
+            
+            <!-- Modern Editorial Badge -->
+            <div class="inline-flex items-center space-x-3 px-4 py-1.5 rounded-full apple-glass-light border border-rosegold/40 mb-8 shadow-rosegold-glow animate-float">
+                <span class="w-2 h-2 rounded-full bg-rosegold animate-ping"></span>
+                <span class="font-mono text-[11px] text-rosegold tracking-[0.3em] uppercase">The Wedding Proclamation</span>
+            </div>
+
+            <!-- Couple Name Header -->
+            <h1 class="font-serif text-6xl sm:text-8xl md:text-9xl font-extrabold tracking-tight leading-none mb-4">
+                <span id="dispBride" class="rosegold-gradient-text">ADITI</span>
+                <span class="font-serif italic font-normal text-cream/40 text-4xl sm:text-6xl md:text-7xl mx-2">&</span>
+                <span id="dispGroom" class="rosegold-gradient-text">ATHARV</span>
+            </h1>
+
+            <p class="font-serif italic text-xl sm:text-2xl text-cream/80 max-w-2xl mb-8 font-light">
+                Request the pleasure of your company as we step into our forever.
+            </p>
+
+            <!-- Editable Hero Portrait Display -->
+            <div class="relative mb-10 group cursor-pointer" onclick="openPhotoUploaderModal('hero')">
+                <div class="w-32 h-32 sm:w-40 sm:h-40 rounded-full p-1 border-2 border-rosegold shadow-rosegold-glow overflow-hidden mx-auto apple-glass">
+                    <img id="imgHeroPortrait" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80" alt="Couple Portrait" class="w-full h-full object-cover rounded-full group-hover:scale-110 transition-transform duration-500">
+                </div>
+                <div class="absolute inset-0 bg-obsidian/70 rounded-full flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity text-rosegold text-xs font-mono">
+                    <i class="fa-solid fa-camera mb-1"></i>
+                    <span>Replace Photo</span>
+                </div>
+            </div>
+
+            <!-- GLASS HUD COUNTDOWN CARD -->
+            <div class="w-full max-w-3xl apple-glass rounded-3xl p-6 sm:p-8 border border-rosegold/30 shadow-hud-card mb-12 tilt-card" id="heroHudCard">
+                <div class="flex items-center justify-between border-b border-cream/10 pb-4 mb-6">
+                    <div class="flex items-center space-x-2 text-xs font-mono text-rosegold">
+                        <i class="fa-solid fa-location-dot"></i>
+                        <span id="dispVenueHeader" class="uppercase tracking-widest">AKOT, MAHARASHTRA</span>
+                    </div>
+                    <div class="text-xs font-mono text-cream/60">
+                        <span id="dispDateHeader">JANUARY 29, 2027</span> • <span id="dispTimeHeader">12:00 PM IST</span>
+                    </div>
+                </div>
+
+                <!-- Timer Grid -->
+                <div class="grid grid-cols-4 gap-3 sm:gap-6">
+                    <div class="apple-glass-light rounded-2xl p-4 text-center border border-cream/10">
+                        <span id="cdDays" class="font-display text-3xl sm:text-5xl font-extrabold rosegold-gradient-text block">00</span>
+                        <span class="font-mono text-[10px] sm:text-xs text-cream/50 uppercase tracking-widest mt-1 block">Days</span>
+                    </div>
+                    <div class="apple-glass-light rounded-2xl p-4 text-center border border-cream/10">
+                        <span id="cdHours" class="font-display text-3xl sm:text-5xl font-extrabold rosegold-gradient-text block">00</span>
+                        <span class="font-mono text-[10px] sm:text-xs text-cream/50 uppercase tracking-widest mt-1 block">Hours</span>
+                    </div>
+                    <div class="apple-glass-light rounded-2xl p-4 text-center border border-cream/10">
+                        <span id="cdMin" class="font-display text-3xl sm:text-5xl font-extrabold rosegold-gradient-text block">00</span>
+                        <span class="font-mono text-[10px] sm:text-xs text-cream/50 uppercase tracking-widest mt-1 block">Minutes</span>
+                    </div>
+                    <div class="apple-glass-light rounded-2xl p-4 text-center border border-cream/10">
+                        <span id="cdSec" class="font-display text-3xl sm:text-5xl font-extrabold rosegold-gradient-text block">00</span>
+                        <span class="font-mono text-[10px] sm:text-xs text-cream/50 uppercase tracking-widest mt-1 block">Seconds</span>
+                    </div>
+                </div>
+            </div>
+
+            <a href="#cartoon-couple" class="text-xs font-mono tracking-[0.3em] uppercase text-cream/60 hover:text-rosegold transition-colors flex flex-col items-center gap-2">
+                <span>See Cartoon Couple Magic</span>
+                <i class="fa-solid fa-chevron-down animate-bounce text-rosegold"></i>
+            </a>
+
+        </div>
+    </section>
+
+    <!-- ANIMATED CARTOON COUPLE SECTION -->
+    <section id="cartoon-couple" class="py-24 px-4 relative z-20 border-t border-cream/10">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-10">
+                <span class="font-mono text-xs text-rosegold tracking-[0.3em] uppercase block mb-2">Interactive Avatars</span>
+                <h2 class="font-serif text-4xl sm:text-5xl font-bold text-cream">Playful & Romantic Moments</h2>
+                <p class="font-serif italic text-cream/60 text-lg mt-2">Click the interactive buttons below to make Aditi & Atharv react!</p>
+            </div>
+
+            <div class="apple-glass rounded-3xl p-6 sm:p-12 border border-rosegold/40 shadow-hud-card relative overflow-hidden flex flex-col items-center">
+                
+                <!-- Floating Hearts Container overlay -->
+                <div id="cartoonParticleBox" class="absolute inset-0 pointer-events-none z-30 overflow-hidden"></div>
+
+                <!-- Animated Cartoon SVG Stage -->
+                <div id="cartoonCoupleStage" class="relative w-full max-w-lg h-72 sm:h-96 flex items-center justify-center anim-cartoon-sway transition-all">
+                    
+                    <svg viewBox="0 0 600 400" class="w-full h-full drop-shadow-[0_10px_25px_rgba(224,169,109,0.3)]">
+                        <!-- Ambient Glow -->
+                        <circle cx="300" cy="200" r="160" fill="url(#bgGlow)" opacity="0.6"/>
+                        <defs>
+                            <radialGradient id="bgGlow" cx="50%" cy="50%" r="50%">
+                                <stop offset="0%" stop-color="#E0A96D" stop-opacity="0.4"/>
+                                <stop offset="100%" stop-color="#0B0C10" stop-opacity="0"/>
+                            </radialGradient>
+                            <linearGradient id="sherwani" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#1E2028"/>
+                                <stop offset="100%" stop-color="#0B0C10"/>
+                            </linearGradient>
+                            <linearGradient id="lehenga" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#E0A96D"/>
+                                <stop offset="100%" stop-color="#B87B3B"/>
+                            </linearGradient>
+                        </defs>
+
+                        <!-- GROOM CARTOON (Atharv - Left) -->
+                        <g id="groomGroup" transform="translate(180, 80)">
+                            <!-- Body/Sherwani -->
+                            <path d="M 40 180 Q 70 110 100 180 L 110 260 L 30 260 Z" fill="url(#sherwani)" stroke="#E0A96D" stroke-width="2"/>
+                            <!-- Collar -->
+                            <path d="M 55 130 L 70 155 L 85 130" fill="none" stroke="#D4AF37" stroke-width="3"/>
+                            <!-- Head -->
+                            <circle cx="70" cy="90" r="38" fill="#F5CBA7"/>
+                            <!-- Hair -->
+                            <path d="M 32 85 Q 70 40 108 85 Q 90 55 70 55 Q 50 55 32 85 Z" fill="#2C3E50"/>
+                            <!-- Eyes with Blink animation -->
+                            <g class="anim-cartoon-blink">
+                                <circle cx="58" cy="88" r="4" fill="#1A252C"/>
+                                <circle cx="82" cy="88" r="4" fill="#1A252C"/>
+                            </g>
+                            <!-- Smile -->
+                            <path d="M 60 105 Q 70 118 80 105" fill="none" stroke="#A04000" stroke-width="3" stroke-linecap="round"/>
+                            <!-- Blush -->
+                            <circle cx="50" cy="98" r="6" fill="#F1948A" opacity="0.6"/>
+                            <circle cx="90" cy="98" r="6" fill="#F1948A" opacity="0.6"/>
+                        </g>
+
+                        <!-- BRIDE CARTOON (Aditi - Right) -->
+                        <g id="brideGroup" transform="translate(300, 85)">
+                            <!-- Dupatta/Hair Back -->
+                            <path d="M 20 70 Q 70 20 120 70 L 130 250 L 10 250 Z" fill="#900C3F" opacity="0.8"/>
+                            <!-- Lehenga Body -->
+                            <path d="M 40 175 Q 70 120 100 175 L 120 260 L 20 260 Z" fill="url(#lehenga)" stroke="#FFF1E0" stroke-width="1.5"/>
+                            <!-- Head -->
+                            <circle cx="70" cy="90" r="36" fill="#F5B7B1"/>
+                            <!-- Bindi & Maang Tikka -->
+                            <circle cx="70" cy="74" r="3" fill="#C0392B"/>
+                            <line x1="70" y1="54" x2="70" y2="70" stroke="#D4AF37" stroke-width="2"/>
+                            <!-- Eyes with Blink -->
+                            <g class="anim-cartoon-blink">
+                                <circle cx="56" cy="88" r="4" fill="#1A252C"/>
+                                <circle cx="84" cy="88" r="4" fill="#1A252C"/>
+                                <!-- Eyelashes -->
+                                <path d="M 52 82 L 56 85 M 88 82 L 84 85" stroke="#1A252C" stroke-width="1.5"/>
+                            </g>
+                            <!-- Smile -->
+                            <path d="M 60 105 Q 70 118 80 105" fill="none" stroke="#900C3F" stroke-width="3" stroke-linecap="round"/>
+                            <!-- Rosy Cheeks -->
+                            <circle cx="48" cy="98" r="7" fill="#E74C3C" opacity="0.5"/>
+                            <circle cx="92" cy="98" r="7" fill="#E74C3C" opacity="0.5"/>
+                        </g>
+
+                        <!-- HAND IN HAND CONNECTION -->
+                        <g id="holdingHandsGroup">
+                            <path d="M 250 220 Q 300 240 350 220" fill="none" stroke="#F5CBA7" stroke-width="8" stroke-linecap="round"/>
+                            <!-- Floating Heart Icon above hands -->
+                            <path id="cartoonHandHeart" d="M 300 180 Q 300 170 292 170 Q 284 170 284 180 Q 284 192 300 204 Q 316 192 316 180 Q 316 170 308 170 Q 300 170 300 180 Z" fill="#FF4D6D" class="animate-bounce"/>
+                        </g>
+                    </svg>
+
+                </div>
+
+                <!-- Speech Bubble Display -->
+                <div id="cartoonSpeechBubble" class="mt-4 px-6 py-2.5 rounded-full apple-glass-light border border-rosegold/30 font-handwriting text-xl text-rosegold text-center shadow-rosegold-glow">
+                    "Aditi & Atharv are holding hands and counting down to Jan 29!"
+                </div>
+
+                <!-- Interactive Action Trigger Buttons -->
+                <div class="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-3 w-full max-w-xl">
+                    <button onclick="triggerCartoonAction('kiss')" class="px-4 py-3 rounded-2xl apple-glass-light border border-rosegold/30 hover:border-rosegold hover:bg-rosegold/20 text-cream text-xs font-mono flex items-center justify-center space-x-2 transition-all">
+                        <i class="fa-solid fa-kiss-wink-heart text-rosegold text-sm"></i>
+                        <span>Blow a Kiss</span>
+                    </button>
+
+                    <button onclick="triggerCartoonAction('hug')" class="px-4 py-3 rounded-2xl apple-glass-light border border-rosegold/30 hover:border-rosegold hover:bg-rosegold/20 text-cream text-xs font-mono flex items-center justify-center space-x-2 transition-all">
+                        <i class="fa-solid fa-hands-holding-child text-rosegold text-sm"></i>
+                        <span>Playful Hug</span>
+                    </button>
+
+                    <button onclick="triggerCartoonAction('sparks')" class="px-4 py-3 rounded-2xl apple-glass-light border border-rosegold/30 hover:border-rosegold hover:bg-rosegold/20 text-cream text-xs font-mono flex items-center justify-center space-x-2 transition-all">
+                        <i class="fa-solid fa-wand-magic-sparkles text-rosegold text-sm"></i>
+                        <span>Send Sparks</span>
+                    </button>
+
+                    <button onclick="triggerCartoonAction('dance')" class="px-4 py-3 rounded-2xl apple-glass-light border border-rosegold/30 hover:border-rosegold hover:bg-rosegold/20 text-cream text-xs font-mono flex items-center justify-center space-x-2 transition-all">
+                        <i class="fa-solid fa-music text-rosegold text-sm"></i>
+                        <span>Funny Dance</span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- SURPRISE FOR ADITI SECTION -->
+    <section id="surprise" class="py-24 px-4 relative z-20 border-t border-cream/10">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <span class="font-mono text-xs text-rosegold tracking-[0.3em] uppercase block mb-2">Secret Interactive Vault</span>
+                <h2 class="font-serif text-4xl sm:text-5xl font-bold text-cream">A Surprise For Aditi</h2>
+                <p class="font-serif italic text-cream/60 text-lg mt-2">A private lockbox reserved for the bride from Atharv</p>
+            </div>
+
+            <!-- Lock / Giftbox Container Card -->
+            <div id="surpriseVaultCard" class="apple-glass rounded-3xl p-8 sm:p-12 border border-rosegold/40 text-center relative overflow-hidden shadow-hud-card transition-all duration-700">
+                <!-- Lock Icon Overlay State -->
+                <div id="vaultLockedState" class="flex flex-col items-center justify-center py-8">
+                    <div class="w-20 h-20 rounded-full bg-rosegold/10 border border-rosegold/40 flex items-center justify-center text-rosegold text-3xl mb-6 shadow-rosegold-glow animate-pulse">
+                        <i id="vaultLockIcon" class="fa-solid fa-lock"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl font-bold text-cream mb-2">"A Secret Note for the Bride"</h3>
+                    <p class="font-sans text-sm text-cream/70 max-w-md mx-auto mb-8">
+                        Click below to unseal Atharv's handwritten letter, voice note simulation, and hidden memory drawer.
+                    </p>
+                    <button onclick="unlockSurpriseVault()" class="px-8 py-4 bg-rosegold text-obsidian font-bold text-xs tracking-[0.25em] uppercase rounded-full hover:bg-champagneLight transition-all shadow-rosegold-glow flex items-center space-x-3 cursor-pointer">
+                        <i class="fa-solid fa-key text-xs"></i>
+                        <span>Unseal Bride's Secret Vault</span>
+                    </button>
+                </div>
+
+                <!-- Unlocked Content Drawer State -->
+                <div id="vaultUnlockedState" class="hidden text-left space-y-8 animate-fade-in">
+                    <div class="flex items-center justify-between border-b border-rosegold/30 pb-4">
+                        <div class="flex items-center space-x-3">
+                            <span class="w-3 h-3 rounded-full bg-rosegold"></span>
+                            <span class="font-mono text-xs text-rosegold uppercase tracking-widest">To My Bride, Aditi</span>
+                        </div>
+                        <span class="font-mono text-xs text-cream/50">Private Letter #01</span>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+                        <!-- Handwritten Letter Simulation -->
+                        <div class="space-y-4">
+                            <p class="font-serif italic text-xl text-rosegold leading-relaxed">
+                                "My Dearest Aditi,"
+                            </p>
+                            <p class="font-serif text-cream/90 text-base leading-relaxed">
+                                From our first meeting to this very moment, counting down to January 29th in Akot, every second with you feels like a dream I never want to wake from. You are my home, my joy, and my absolute greatest adventure.
+                            </p>
+                            <p class="font-serif text-cream/90 text-base leading-relaxed">
+                                I cannot wait to hold your hand under the wedding mandap and begin our forever story together.
+                            </p>
+                            <p class="font-serif italic text-right text-rosegold text-lg pt-2">
+                                — Yours always, Atharv
+                            </p>
+                        </div>
+
+                        <!-- Audio Message Simulation & Polaroid Reveal Drawer -->
+                        <div class="space-y-6">
+                            <!-- Simulated Audio Player -->
+                            <div class="apple-glass-light rounded-2xl p-5 border border-rosegold/30">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="font-mono text-xs text-cream/70"><i class="fa-solid fa-microphone text-rosegold mr-2"></i> Atharv's Voice Note</span>
+                                    <span class="font-mono text-[10px] text-rosegold">01:24</span>
+                                </div>
+                                <div class="flex items-center space-x-4">
+                                    <button onclick="playVoiceNoteSim()" id="voicePlayBtn" class="w-10 h-10 rounded-full bg-rosegold text-obsidian flex items-center justify-center text-sm font-bold shadow-rosegold-glow">
+                                        <i id="voicePlayIcon" class="fa-solid fa-play"></i>
+                                    </button>
+                                    <div class="flex-1 bg-cream/10 h-2 rounded-full overflow-hidden">
+                                        <div id="voiceProgress" class="bg-rosegold h-full w-0 transition-all duration-300"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Hidden Memory Drawer Reveal with Upload Trigger -->
+                            <div class="apple-glass-light rounded-2xl p-4 border border-rosegold/30">
+                                <div class="flex items-center justify-between mb-2">
+                                    <span class="font-mono text-[10px] text-rosegold uppercase tracking-widest">Secret Memory Drawer</span>
+                                    <button onclick="openPhotoUploaderModal('surprise')" class="text-[10px] font-mono text-cream/60 hover:text-rosegold">
+                                        <i class="fa-solid fa-pen-to-square"></i> Change
+                                    </button>
+                                </div>
+                                <div class="relative h-48 rounded-xl overflow-hidden group cursor-pointer" onclick="openLightbox(document.getElementById('imgSurprisePhoto').src)">
+                                    <img id="imgSurprisePhoto" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=900&q=80" alt="Surprise Memory" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                                    <div class="absolute inset-0 bg-obsidian/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                                        <span class="font-mono text-xs text-cream uppercase bg-obsidian/80 px-3 py-1.5 rounded-full border border-rosegold">Expand Photo</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOVE STORY TIMELINE -->
+    <section id="story" class="py-24 px-4 relative z-20 border-t border-cream/10">
+        <div class="max-w-5xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="font-mono text-xs text-rosegold tracking-[0.3em] uppercase block mb-2">Our Journey</span>
+                <h2 class="font-serif text-4xl sm:text-5xl font-bold text-cream">How Forever Began</h2>
+                <p class="font-serif italic text-cream/60 text-lg mt-2">Milestones along our shared path to Akot</p>
+            </div>
+
+            <!-- Vertical Milestone Cards -->
+            <div class="relative border-l border-rosegold/30 ml-4 sm:ml-32 space-y-12">
+                
+                <!-- Milestone 1 -->
+                <div class="relative pl-8 sm:pl-12 group">
+                    <div class="absolute -left-[13px] top-1.5 w-6 h-6 rounded-full bg-obsidian border-2 border-rosegold flex items-center justify-center text-rosegold text-[10px] shadow-rosegold-glow group-hover:scale-125 transition-transform">
+                        <i class="fa-solid fa-sparkles"></i>
+                    </div>
+                    <div class="apple-glass rounded-2xl p-6 sm:p-8 border border-rosegold/20 hover:border-rosegold/50 transition-all duration-300">
+                        <span class="font-mono text-xs text-rosegold tracking-widest uppercase">Chapter 01 • November 2024</span>
+                        <h3 class="font-serif text-2xl text-cream font-bold my-2">The First Hello</h3>
+                        <p class="font-sans text-cream/70 text-sm leading-relaxed">
+                            An unexpected coffee meeting that turned into a four-hour conversation about art, travel, and life dreams.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Milestone 2 -->
+                <div class="relative pl-8 sm:pl-12 group">
+                    <div class="absolute -left-[13px] top-1.5 w-6 h-6 rounded-full bg-obsidian border-2 border-rosegold flex items-center justify-center text-rosegold text-[10px] shadow-rosegold-glow group-hover:scale-125 transition-transform">
+                        <i class="fa-solid fa-heart"></i>
+                    </div>
+                    <div class="apple-glass rounded-2xl p-6 sm:p-8 border border-rosegold/20 hover:border-rosegold/50 transition-all duration-300">
+                        <span class="font-mono text-xs text-rosegold tracking-widest uppercase">Chapter 01 • March 2025</span>
+                        <h3 class="font-serif text-2xl text-cream font-bold my-2">The Golden Sunset Proposal</h3>
+                        <p class="font-sans text-cream/70 text-sm leading-relaxed">
+                            Under a canopy of evening stars, Atharv asked the question that made all future plans instantly clear.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Milestone 3 -->
+                <div class="relative pl-8 sm:pl-12 group">
+                    <div class="absolute -left-[13px] top-1.5 w-6 h-6 rounded-full bg-obsidian border-2 border-rosegold flex items-center justify-center text-rosegold text-[10px] shadow-rosegold-glow group-hover:scale-125 transition-transform">
+                        <i class="fa-solid fa-ring"></i>
+                    </div>
+                    <div class="apple-glass rounded-2xl p-6 sm:p-8 border border-rosegold/30 hover:border-rosegold transition-all duration-300">
+                        <span class="font-mono text-xs text-rosegold tracking-widest uppercase">Chapter 19 • July 2026</span>
+                        <h3 class="font-serif text-2xl text-cream font-bold my-2">The Ring Ceremony</h3>
+                        <p class="font-sans text-cream/70 text-sm leading-relaxed">
+                            Gathering our closest family and friends in Akot to seal our vows with love and blessings.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- GALLERY & MOMENTS IN MOTION -->
+    <section id="gallery" class="py-24 px-4 relative z-20 border-t border-cream/10">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 gap-4">
+                <div>
+                    <span class="font-mono text-xs text-rosegold tracking-[0.3em] uppercase block mb-2">Visual Collection</span>
+                    <h2 class="font-serif text-4xl sm:text-5xl font-bold text-cream">Memories In Motion</h2>
+                </div>
+
+                <!-- Gallery Controls & Upload Trigger -->
+                <div class="flex items-center space-x-3">
+                    <button onclick="openPhotoUploaderModal('gallery')" class="px-4 py-2 rounded-full bg-rosegold text-obsidian font-bold font-mono text-xs tracking-wider uppercase hover:bg-champagneLight transition-all shadow-rosegold-glow flex items-center space-x-2">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        <span>Upload Custom Gallery Photos</span>
+                    </button>
+
+                    <!-- Photo Filter Controls -->
+                    <div class="flex items-center space-x-1 apple-glass-light p-1 rounded-full border border-rosegold/30 text-xs font-mono">
+                        <button onclick="setGalleryFilter('editorial')" class="filter-btn active-filter px-3 py-1.5 rounded-full bg-rosegold text-obsidian font-bold">Editorial</button>
+                        <button onclick="setGalleryFilter('bw')" class="filter-btn px-3 py-1.5 rounded-full text-cream/70 hover:text-cream">B&W</button>
+                        <button onclick="setGalleryFilter('warm')" class="filter-btn px-3 py-1.5 rounded-full text-cream/70 hover:text-cream">Warm</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Masonry Photo Grid with Custom Photo Target Replace -->
+            <div id="galleryGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 filter-editorial transition-all duration-500">
+                
+                <!-- Photo Card 1 -->
+                <div class="apple-glass rounded-3xl overflow-hidden border border-rosegold/20 group relative">
+                    <div class="relative h-80 overflow-hidden cursor-pointer" onclick="openLightbox(document.getElementById('imgGal1').src)">
+                        <img id="imgGal1" src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=900&q=80" alt="Couple Moment 1" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono">
+                            <span class="text-rosegold">Engagement Soirée</span>
+                            <span class="text-cream/60">Pune</span>
+                        </div>
+                    </div>
+                    <!-- Direct Replace Overlay -->
+                    <button onclick="openPhotoUploaderModal('gal1')" class="absolute top-3 right-3 px-3 py-1.5 rounded-full apple-glass-light border border-rosegold/40 text-cream text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity hover:bg-rosegold hover:text-obsidian">
+                        <i class="fa-solid fa-camera mr-1"></i> Replace
+                    </button>
+                </div>
+
+                <!-- Photo Card 2 -->
+                <div class="apple-glass rounded-3xl overflow-hidden border border-rosegold/20 group relative">
+                    <div class="relative h-80 overflow-hidden cursor-pointer" onclick="openLightbox(document.getElementById('imgGal2').src)">
+                        <img id="imgGal2" src="https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=80" alt="Couple Moment 2" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono">
+                            <span class="text-rosegold">Bridal Details</span>
+                            <span class="text-cream/60">Akot</span>
+                        </div>
+                    </div>
+                    <button onclick="openPhotoUploaderModal('gal2')" class="absolute top-3 right-3 px-3 py-1.5 rounded-full apple-glass-light border border-rosegold/40 text-cream text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity hover:bg-rosegold hover:text-obsidian">
+                        <i class="fa-solid fa-camera mr-1"></i> Replace
+                    </button>
+                </div>
+
+                <!-- Photo Card 3 -->
+                <div class="apple-glass rounded-3xl overflow-hidden border border-rosegold/20 group relative">
+                    <div class="relative h-80 overflow-hidden cursor-pointer" onclick="openLightbox(document.getElementById('imgGal3').src)">
+                        <img id="imgGal3" src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80" alt="Couple Moment 3" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-obsidian via-transparent to-transparent opacity-80"></div>
+                        <div class="absolute bottom-4 left-4 right-4 flex items-center justify-between text-xs font-mono">
+                            <span class="text-rosegold">Floral Setting</span>
+                            <span class="text-cream/60">Celebration</span>
+                        </div>
+                    </div>
+                    <button onclick="openPhotoUploaderModal('gal3')" class="absolute top-3 right-3 px-3 py-1.5 rounded-full apple-glass-light border border-rosegold/40 text-cream text-[10px] font-mono opacity-0 group-hover:opacity-100 transition-opacity hover:bg-rosegold hover:text-obsidian">
+                        <i class="fa-solid fa-camera mr-1"></i> Replace
+                    </button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- EVENT ITINERARY -->
+    <section id="itinerary" class="py-24 px-4 relative z-20 border-t border-cream/10">
+        <div class="max-w-6xl mx-auto">
+            <div class="text-center mb-16">
+                <span class="font-mono text-xs text-rosegold tracking-[0.3em] uppercase block mb-2">Celebration Schedule</span>
+                <h2 class="font-serif text-4xl sm:text-5xl font-bold text-cream">Multi-Day Itinerary</h2>
+                <p class="font-serif italic text-cream/60 text-lg mt-2">Join us for every magical moment</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                
+                <!-- Event 1 -->
+                <div class="apple-glass rounded-3xl p-8 border border-rosegold/30 flex flex-col justify-between hover:border-rosegold transition-all">
+                    <div>
+                        <span class="font-mono text-xs text-rosegold tracking-widest uppercase">Jan 28, 2027 • 07:30 PM</span>
+                        <h3 class="font-serif text-2xl font-bold text-cream my-3">Simanti Poojan</h3>
+                        <p class="font-sans text-cream/70 text-sm mb-6">
+                            A vibrant celebration of rituals, and intricate henna artistry.
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-cream/10 flex items-center justify-between text-xs font-mono">
+                        <span class="text-cream/50">Palace Gardens</span>
+                        <button onclick="addGoogleCal('Haldi & Mehendi', 'Akot', '2027-01-28T09:30:00')" class="text-rosegold hover:underline">Add to Cal</button>
+                    </div>
+                </div>
+
+                <!-- Event 2 -->
+                <div class="apple-glass rounded-3xl p-8 border border-rosegold/30 flex flex-col justify-between hover:border-rosegold transition-all">
+                    <div>
+                        <span class="font-mono text-xs text-rosegold tracking-widest uppercase">Jan 28, 2027 • 09:00 PM</span>
+                        <h3 class="font-serif text-2xl font-bold text-cream my-3">Royal Sangeet</h3>
+                        <p class="font-sans text-cream/70 text-sm mb-6">
+                            An evening of music, dance performances, live piano soundscapes, and cocktail feast.
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-cream/10 flex items-center justify-between text-xs font-mono">
+                        <span class="text-cream/50">Grand Ballroom</span>
+                        <button onclick="addGoogleCal('Royal Sangeet', 'Akot', '2027-01-28T19:00:00')" class="text-rosegold hover:underline">Add to Cal</button>
+                    </div>
+                </div>
+
+                <!-- Event 3 -->
+                <div class="apple-glass rounded-3xl p-8 border-2 border-rosegold shadow-rosegold-glow flex flex-col justify-between relative">
+                    <span class="absolute top-4 right-4 font-mono text-[9px] bg-rosegold text-obsidian font-bold px-2.5 py-1 rounded-full uppercase">Main Ceremony</span>
+                    <div>
+                        <span class="font-mono text-xs text-rosegold tracking-widest uppercase">Jan 29, 2027 • 12:00 PM</span>
+                        <h3 class="font-serif text-2xl font-bold text-cream my-3">The Muhurtham Vows</h3>
+                        <p class="font-sans text-cream/70 text-sm mb-6">
+                            Sacred Vedic ceremony, seven vows, and garland exchange under the mandap.
+                        </p>
+                    </div>
+                    <div class="pt-6 border-t border-cream/10 flex items-center justify-between text-xs font-mono">
+                        <span class="text-cream/50">Mandapam, Akot</span>
+                        <button onclick="addGoogleCal('Wedding Ceremony', 'Akot', '2027-01-29T12:00:00')" class="text-rosegold hover:underline">Add to Cal</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- VENUE GUIDE -->
+    <section id="venue" class="py-24 px-4 relative z-20 border-t border-cream/10">
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+                <span class="font-mono text-xs text-rosegold tracking-[0.3em] uppercase block mb-2">Location Insights</span>
+                <h2 class="font-serif text-4xl font-bold text-cream mb-4">Destination: Akot</h2>
+                <p class="font-sans text-cream/70 text-sm leading-relaxed mb-6">
+                    Akot, nestled in Maharashtra, provides the serene and regal backdrop for our wedding festivities.
+                </p>
+
+                <!-- Weather & Dress Code Cards -->
+                <div class="grid grid-cols-2 gap-4 mb-6 text-xs font-mono">
+                    <div class="apple-glass-light p-4 rounded-2xl border border-cream/10">
+                        <i class="fa-solid fa-sun text-rosegold text-lg mb-2 block"></i>
+                        <span class="text-cream/50 uppercase block">Expected Temp</span>
+                        <span class="text-cream font-bold text-sm">26°C Sunny</span>
+                    </div>
+                    <div class="apple-glass-light p-4 rounded-2xl border border-cream/10">
+                        <i class="fa-solid fa-shirt text-rosegold text-lg mb-2 block"></i>
+                        <span class="text-cream/50 uppercase block">Attire Theme</span>
+                        <span class="text-cream font-bold text-sm">Modern Traditional</span>
+                    </div>
+                </div>
+
+                <a href="https://maps.google.com/?q=Akot,Maharashtra" target="_blank" class="inline-flex items-center space-x-2 px-6 py-3 rounded-full bg-rosegold text-obsidian font-bold text-xs tracking-widest uppercase hover:bg-champagneLight transition-all">
+                    <i class="fa-solid fa-diamond-turn-right"></i>
+                    <span>Open in Google Maps</span>
+                </a>
+            </div>
+
+            <!-- Simulated Map Card -->
+            <div class="apple-glass rounded-3xl overflow-hidden border border-rosegold/30 h-80 relative shadow-hud-card">
+                <iframe class="w-full h-full border-0 grayscale opacity-80 hover:grayscale-0 transition-all duration-500" src="https://maps.google.com/maps?q=Akot%20Maharashtra&t=&z=13&ie=UTF8&iwloc=&output=embed" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- RSVP & BLESSINGS -->
+    <section id="rsvp" class="py-24 px-4 relative z-20 border-t border-cream/10">
+        <div class="max-w-4xl mx-auto">
+            <div class="apple-glass rounded-3xl p-8 sm:p-12 border border-rosegold/40 shadow-hud-card">
+                <div class="text-center mb-10">
+                    <span class="font-mono text-xs text-rosegold tracking-[0.3em] uppercase block mb-2">Guest Confirmation</span>
+                    <h2 class="font-serif text-3xl sm:text-4xl font-bold text-cream">RSVP & Send Blessings</h2>
+                </div>
+
+                <form id="rsvpForm" onsubmit="saveRSVP(event)" class="space-y-6 font-sans text-sm">
+                    <div>
+                        <label class="block font-mono text-xs text-rosegold uppercase tracking-widest mb-2">Your Full Name *</label>
+                        <input id="guestName" type="text" required placeholder="e.g. Priyanshu Sharma" class="w-full px-5 py-3.5 rounded-2xl apple-glass-light border border-rosegold/30 text-cream focus:outline-none focus:border-rosegold">
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block font-mono text-xs text-rosegold uppercase tracking-widest mb-2">Will You Attend? *</label>
+                            <select id="guestAttend" required class="w-full px-5 py-3.5 rounded-2xl apple-glass-light border border-rosegold/30 text-cream focus:outline-none focus:border-rosegold bg-obsidian">
+                                <option value="Joyfully Attending">Joyfully Attending</option>
+                                <option value="Regretfully Declining">Regretfully Declining</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block font-mono text-xs text-rosegold uppercase tracking-widest mb-2">Guest Count</label>
+                            <input id="guestCount" type="number" min="1" max="8" value="1" class="w-full px-5 py-3.5 rounded-2xl apple-glass-light border border-rosegold/30 text-cream focus:outline-none focus:border-rosegold">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block font-mono text-xs text-rosegold uppercase tracking-widest mb-2">Blessing / Heartfelt Message</label>
+                        <textarea id="guestMsg" rows="3" placeholder="Leave your note for Aditi & Atharv..." class="w-full px-5 py-3.5 rounded-2xl apple-glass-light border border-rosegold/30 text-cream focus:outline-none focus:border-rosegold"></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full py-4 rounded-2xl bg-rosegold text-obsidian font-bold font-mono text-xs tracking-[0.25em] uppercase hover:bg-champagneLight transition-all shadow-rosegold-glow">
+                        Submit Confirmation
+                    </button>
+                </form>
+            </div>
+
+            <!-- Dynamic Wish Wall -->
+            <div class="mt-16">
+                <h3 class="font-serif text-2xl font-bold text-cream text-center mb-8">Blessings Wall</h3>
+                <div id="wishesWall" class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <!-- Guest blessings render here dynamically -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="py-12 border-t border-cream/10 text-center text-xs font-mono text-cream/50 relative z-20">
+        <p class="rosegold-gradient-text font-serif text-2xl font-bold mb-2">ADITI & ATHARV</p>
+        <p>January 29, 2027 • Akot, Maharashtra</p>
+    </footer>
+
+    <!-- EASY CUSTOM PHOTO UPLOADER MODAL -->
+    <div id="photoUploaderModal" class="fixed inset-0 z-50 bg-obsidian/85 backdrop-blur-md hidden flex items-center justify-center p-4 overflow-y-auto">
+        <div class="apple-glass max-w-xl w-full p-6 sm:p-8 rounded-3xl border border-rosegold shadow-hud-card relative my-8">
+            <button onclick="closePhotoUploaderModal()" class="absolute top-4 right-4 text-cream/50 hover:text-cream"><i class="fa-solid fa-xmark text-lg"></i></button>
+            
+            <div class="flex items-center space-x-3 mb-6">
+                <div class="w-10 h-10 rounded-full bg-rosegold/20 text-rosegold flex items-center justify-center text-lg">
+                    <i class="fa-solid fa-camera"></i>
+                </div>
+                <div>
+                    <h3 class="font-serif text-2xl font-bold rosegold-gradient-text">Photo Manager</h3>
+                    <p class="font-mono text-xs text-cream/60">Upload local photos or paste custom image web links</p>
+                </div>
+            </div>
+
+            <div class="space-y-6 text-xs font-sans">
+                
+                <!-- Target Selector -->
+                <div>
+                    <label class="block text-rosegold font-mono uppercase tracking-wider mb-2">Select Target Image Slot</label>
+                    <select id="photoTargetSelect" class="w-full px-4 py-3 rounded-2xl apple-glass-light border border-rosegold/30 text-cream bg-obsidian font-mono focus:border-rosegold">
+                        <option value="hero">Hero Couple Portrait</option>
+                        <option value="surprise">Bride's Secret Surprise Drawer</option>
+                        <option value="gal1">Gallery Photo #01 (Engagement)</option>
+                        <option value="gal2">Gallery Photo #02 (Bridal Detail)</option>
+                        <option value="gal3">Gallery Photo #03 (Floral Scene)</option>
+                    </select>
+                </div>
+
+                <!-- Option A: File Upload -->
+                <div class="apple-glass-light rounded-2xl p-4 border border-rosegold/20 space-y-3">
+                    <span class="font-mono text-rosegold font-bold uppercase block"><i class="fa-solid fa-file-arrow-up mr-1.5"></i> Method A: Upload Local Image File</span>
+                    <input type="file" id="localFileInput" accept="image/*" class="hidden" onchange="handleFileSelect(event)">
+                    <label for="localFileInput" class="w-full py-3 px-4 rounded-xl border border-dashed border-rosegold/50 hover:border-rosegold flex items-center justify-center space-x-2 text-cream/80 cursor-pointer transition-colors bg-obsidian/40">
+                        <i class="fa-solid fa-cloud-arrow-up text-rosegold text-base"></i>
+                        <span id="fileInputLabel">Choose Photo File from Device...</span>
+                    </label>
+                </div>
+
+                <!-- Option B: Image URL -->
+                <div class="apple-glass-light rounded-2xl p-4 border border-rosegold/20 space-y-3">
+                    <span class="font-mono text-rosegold font-bold uppercase block"><i class="fa-solid fa-link mr-1.5"></i> Method B: Paste Image Web URL</span>
+                    <input type="url" id="imageUrlInput" placeholder="https://images.unsplash.com/your-photo.jpg" class="w-full px-4 py-3 rounded-xl apple-glass-light border border-rosegold/30 text-cream focus:outline-none focus:border-rosegold">
+                </div>
+
+                <!-- Live Preview Thumbnail -->
+                <div id="photoPreviewContainer" class="hidden apple-glass-light rounded-2xl p-4 border border-rosegold/30 flex items-center space-x-4">
+                    <img id="photoPreviewImg" src="" alt="Preview" class="w-16 h-16 object-cover rounded-xl border border-rosegold">
+                    <div class="text-mono text-xs">
+                        <span class="text-rosegold font-bold block">Ready to Apply!</span>
+                        <span class="text-cream/60">Image loaded into preview memory.</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center space-x-3 pt-2">
+                    <button onclick="applyPhotoChange()" class="flex-1 py-3.5 rounded-2xl bg-rosegold text-obsidian font-bold font-mono tracking-widest uppercase hover:bg-champagneLight transition-all shadow-rosegold-glow">
+                        Apply & Save Photo
+                    </button>
+                    <button onclick="resetPhotosToDefault()" class="px-4 py-3.5 rounded-2xl apple-glass-light border border-cream/20 text-cream/60 hover:text-rosegold font-mono text-xs" title="Reset all photos to original sample photos">
+                        Reset Defaults
+                    </button>
+                </div>
+
+                <div class="p-3 rounded-xl bg-rosegold/10 border border-rosegold/20 text-[10px] font-mono text-cream/60 leading-relaxed">
+                    <i class="fa-solid fa-circle-info text-rosegold mr-1"></i> Your custom uploaded photos are saved directly inside your browser storage (localStorage) and will remain visible whenever you visit this invitation!
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- LIGHTBOX MODAL -->
+    <div id="lightbox" class="fixed inset-0 z-50 bg-obsidian/95 hidden flex items-center justify-center p-4 cursor-pointer" onclick="closeLightbox()">
+        <img id="lightboxImg" src="" alt="Expanded View" class="max-w-full max-h-[85vh] rounded-3xl border border-rosegold shadow-hud-card">
+    </div>
+
+    <!-- SETTINGS / EDIT DETAILS MODAL -->
+    <div id="settingsModal" class="fixed inset-0 z-50 bg-obsidian/80 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div class="apple-glass max-w-lg w-full p-8 rounded-3xl border border-rosegold shadow-hud-card relative">
+            <button onclick="closeSettingsModal()" class="absolute top-4 right-4 text-cream/50 hover:text-cream"><i class="fa-solid fa-xmark text-lg"></i></button>
+            <h3 class="font-serif text-2xl font-bold rosegold-gradient-text mb-6">Edit Celebration Details</h3>
+
+            <div class="space-y-4 font-sans text-xs">
+                <div>
+                    <label class="block text-rosegold font-mono mb-1">Bride Name</label>
+                    <input id="editBride" type="text" value="Aditi" class="w-full px-4 py-2.5 rounded-xl apple-glass-light border border-rosegold/30 text-cream">
+                </div>
+                <div>
+                    <label class="block text-rosegold font-mono mb-1">Groom Name</label>
+                    <input id="editGroom" type="text" value="Atharv" class="w-full px-4 py-2.5 rounded-xl apple-glass-light border border-rosegold/30 text-cream">
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-rosegold font-mono mb-1">Date</label>
+                        <input id="editDate" type="date" value="2027-01-29" class="w-full px-4 py-2.5 rounded-xl apple-glass-light border border-rosegold/30 text-cream">
+                    </div>
+                    <div>
+                        <label class="block text-rosegold font-mono mb-1">Time</label>
+                        <input id="editTime" type="text" value="12:00 PM" class="w-full px-4 py-2.5 rounded-xl apple-glass-light border border-rosegold/30 text-cream">
+                    </div>
+                </div>
+                <div>
+                    <label class="block text-rosegold font-mono mb-1">Venue City</label>
+                    <input id="editVenue" type="text" value="Akot" class="w-full px-4 py-2.5 rounded-xl apple-glass-light border border-rosegold/30 text-cream">
+                </div>
+
+                <div class="pt-2">
+                    <button onclick="openPhotoUploaderModal()" class="w-full py-2.5 rounded-xl apple-glass-light border border-rosegold/40 text-rosegold font-mono mb-3 hover:bg-rosegold hover:text-obsidian transition-colors">
+                        <i class="fa-solid fa-images mr-1.5"></i> Open Photo Manager
+                    </button>
+                    <button onclick="saveDetails()" class="w-full py-3 rounded-xl bg-rosegold text-obsidian font-bold font-mono tracking-widest uppercase shadow-rosegold-glow">
+                        Update Details Live
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Core Celebration Details State
+        let config = {
+            bride: "Aditi",
+            groom: "Atharv",
+            date: "2027-01-29",
+            time: "12:00 PM",
+            venue: "Akot"
+        };
+
+        // Live Countdown Engine
+        function updateCountdown() {
+            const target = new Date(`${config.date}T12:00:00`).getTime();
+            const now = new Date().getTime();
+            const diff = target - now;
+
+            if (diff > 0) {
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+                document.getElementById('cdDays').innerText = d < 10 ? '0' + d : d;
+                document.getElementById('cdHours').innerText = h < 10 ? '0' + h : h;
+                document.getElementById('cdMin').innerText = m < 10 ? '0' + m : m;
+                document.getElementById('cdSec').innerText = s < 10 ? '0' + s : s;
+            }
+        }
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Cartoon Couple Interactive Action Engine
+        function triggerCartoonAction(actionType) {
+            const particleBox = document.getElementById('cartoonParticleBox');
+            const bubble = document.getElementById('cartoonSpeechBubble');
+            const stage = document.getElementById('cartoonCoupleStage');
+
+            if (actionType === 'kiss') {
+                bubble.innerText = '"Atharv blew a romantic kiss to Aditi! 💋✨"';
+                spawnHearts(12, '💋');
+            } else if (actionType === 'hug') {
+                bubble.innerText = '"Aditi & Atharv shared a warm, sweet hug! 🤗❤️"';
+                spawnHearts(15, '❤️');
+            } else if (actionType === 'sparks') {
+                bubble.innerText = '"Sparkles of love generated around the couple! ✨💖"';
+                spawnHearts(20, '✨');
+            } else if (actionType === 'dance') {
+                bubble.innerText = '"Atharv is showing off his funny wedding dance moves! 🕺💃"';
+                stage.classList.add('dance-active');
+                setTimeout(() => stage.classList.remove('dance-active'), 3500);
+                spawnHearts(10, '🎶');
+            }
+        }
+
+        function spawnHearts(count, emojiStr) {
+            const container = document.getElementById('cartoonParticleBox');
+            for (let i = 0; i < count; i++) {
+                const el = document.createElement('div');
+                el.className = 'absolute text-xl sm:text-2xl pointer-events-none floating-heart-particle';
+                el.innerText = emojiStr;
+                el.style.left = `${Math.random() * 80 + 10}%`;
+                el.style.top = `${Math.random() * 40 + 40}%`;
+                el.style.animationDuration = `${Math.random() * 1.5 + 1.2}s`;
+                container.appendChild(el);
+                setTimeout(() => el.remove(), 2500);
+            }
+        }
+
+        // Custom Photo Uploader & LocalStorage Engine
+        let currentLoadedImageData = "";
+
+        function openPhotoUploaderModal(preferredTarget) {
+            if (preferredTarget) {
+                document.getElementById('photoTargetSelect').value = preferredTarget;
+            }
+            document.getElementById('photoUploaderModal').classList.remove('hidden');
+        }
+
+        function closePhotoUploaderModal() {
+            document.getElementById('photoUploaderModal').classList.add('hidden');
+            currentLoadedImageData = "";
+            document.getElementById('photoPreviewContainer').classList.add('hidden');
+            document.getElementById('imageUrlInput').value = "";
+            document.getElementById('fileInputLabel').innerText = "Choose Photo File from Device...";
+        }
+
+        function handleFileSelect(e) {
+            const file = e.target.files[0];
+            if (file) {
+                document.getElementById('fileInputLabel').innerText = file.name;
+                const reader = new FileReader();
+                reader.onload = function(evt) {
+                    currentLoadedImageData = evt.target.result;
+                    document.getElementById('photoPreviewImg').src = currentLoadedImageData;
+                    document.getElementById('photoPreviewContainer').classList.remove('hidden');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function applyPhotoChange() {
+            const targetSlot = document.getElementById('photoTargetSelect').value;
+            const urlInput = document.getElementById('imageUrlInput').value.trim();
+            const finalSrc = urlInput || currentLoadedImageData;
+
+            if (!finalSrc) {
+                alert("Please select an image file or paste an image URL first!");
+                return;
+            }
+
+            // Apply to specific DOM target
+            if (targetSlot === 'hero') {
+                document.getElementById('imgHeroPortrait').src = finalSrc;
+            } else if (targetSlot === 'surprise') {
+                document.getElementById('imgSurprisePhoto').src = finalSrc;
+            } else if (targetSlot === 'gal1') {
+                document.getElementById('imgGal1').src = finalSrc;
+            } else if (targetSlot === 'gal2') {
+                document.getElementById('imgGal2').src = finalSrc;
+            } else if (targetSlot === 'gal3') {
+                document.getElementById('imgGal3').src = finalSrc;
+            }
+
+            // Persist into LocalStorage
+            const storedPhotos = JSON.parse(localStorage.getItem('aditi_atharv_custom_photos')) || {};
+            storedPhotos[targetSlot] = finalSrc;
+            localStorage.setItem('aditi_atharv_custom_photos', JSON.stringify(storedPhotos));
+
+            closePhotoUploaderModal();
+        }
+
+        function loadStoredCustomPhotos() {
+            const storedPhotos = JSON.parse(localStorage.getItem('aditi_atharv_custom_photos')) || {};
+            if (storedPhotos.hero) document.getElementById('imgHeroPortrait').src = storedPhotos.hero;
+            if (storedPhotos.surprise) document.getElementById('imgSurprisePhoto').src = storedPhotos.surprise;
+            if (storedPhotos.gal1) document.getElementById('imgGal1').src = storedPhotos.gal1;
+            if (storedPhotos.gal2) document.getElementById('imgGal2').src = storedPhotos.gal2;
+            if (storedPhotos.gal3) document.getElementById('imgGal3').src = storedPhotos.gal3;
+        }
+
+        function resetPhotosToDefault() {
+            localStorage.removeItem('aditi_atharv_custom_photos');
+            document.getElementById('imgHeroPortrait').src = "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=600&q=80";
+            document.getElementById('imgSurprisePhoto').src = "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=900&q=80";
+            document.getElementById('imgGal1').src = "https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=900&q=80";
+            document.getElementById('imgGal2').src = "https://images.unsplash.com/photo-1610030469983-98e550d6193c?auto=format&fit=crop&w=900&q=80";
+            document.getElementById('imgGal3').src = "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=900&q=80";
+            closePhotoUploaderModal();
+        }
+
+        // Web Audio API Ambient Synthesizer
+        let audioCtx = null;
+        let isAudioPlaying = false;
+        let audioTimer = null;
+
+        function initAudio() {
+            if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        }
+
+        function playPianoChord(freq) {
+            if (!audioCtx || audioCtx.state === 'suspended') return;
+            try {
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(freq, audioCtx.currentTime);
+                gain.gain.setValueAtTime(0, audioCtx.currentTime);
+                gain.gain.linearRampToValueAtTime(0.08, audioCtx.currentTime + 0.1);
+                gain.gain.exponentialRampToValueAtTime(0.0001, audioCtx.currentTime + 2.5);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 2.5);
+            } catch(e){}
+        }
+
+        const chordNotes = [261.63, 329.63, 392.00, 523.25, 659.25];
+        function toggleAudioSoundscape() {
+            initAudio();
+            if (audioCtx.state === 'suspended') audioCtx.resume();
+            isAudioPlaying = !isAudioPlaying;
+            const statusText = document.getElementById('soundStatusText');
+
+            if (isAudioPlaying) {
+                statusText.innerText = "Sound ON";
+                let noteIdx = 0;
+                audioTimer = setInterval(() => {
+                    playPianoChord(chordNotes[noteIdx % chordNotes.length]);
+                    noteIdx++;
+                }, 900);
+            } else {
+                statusText.innerText = "Sound OFF";
+                if (audioTimer) clearInterval(audioTimer);
+            }
+        }
+
+        // Surprise Vault Unlocking Logic
+        function unlockSurpriseVault() {
+            document.getElementById('vaultLockedState').classList.add('hidden');
+            document.getElementById('vaultUnlockedState').classList.remove('hidden');
+        }
+
+        let isVoicePlaying = false;
+        function playVoiceNoteSim() {
+            const btn = document.getElementById('voicePlayIcon');
+            const progress = document.getElementById('voiceProgress');
+
+            if (!isVoicePlaying) {
+                isVoicePlaying = true;
+                btn.className = "fa-solid fa-pause";
+                progress.style.width = "100%";
+                progress.style.transition = "width 84s linear";
+            } else {
+                isVoicePlaying = false;
+                btn.className = "fa-solid fa-play";
+                progress.style.width = "0%";
+                progress.style.transition = "none";
+            }
+        }
+
+        // Background Particle Trail Canvas
+        const canvas = document.getElementById('bgCanvas');
+        const ctx = canvas.getContext('2d');
+        let w = canvas.width = window.innerWidth;
+        let h = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            w = canvas.width = window.innerWidth;
+            h = canvas.height = window.innerHeight;
+        });
+
+        const trail = [];
+        window.addEventListener('mousemove', (e) => {
+            trail.push({ x: e.clientX, y: e.clientY, r: 4, alpha: 0.8 });
+            if (trail.length > 25) trail.shift();
+        });
+
+        function renderCanvas() {
+            ctx.clearRect(0, 0, w, h);
+            trail.forEach((p) => {
+                p.alpha -= 0.02;
+                if (p.alpha > 0) {
+                    ctx.save();
+                    ctx.globalAlpha = p.alpha;
+                    ctx.fillStyle = '#E0A96D';
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.restore();
+                }
+            });
+            requestAnimationFrame(renderCanvas);
+        }
+        renderCanvas();
+
+        // Gallery Filter Switcher
+        function setGalleryFilter(filterName) {
+            const grid = document.getElementById('galleryGrid');
+            grid.className = `grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 filter-${filterName} transition-all duration-500`;
+        }
+
+        // LocalStorage RSVP Engine
+        function loadWishes() {
+            const container = document.getElementById('wishesWall');
+            const wishes = JSON.parse(localStorage.getItem('aditi_atharv_wishes')) || [
+                { name: "Pratik & Rutuja", text: "Wishing Aditi & Atharv a lifetime of magic and happiness!" }
+            ];
+
+            container.innerHTML = wishes.map(w => `
+                <div class="apple-glass p-6 rounded-2xl border border-rosegold/20">
+                    <p class="font-serif italic text-cream/90 text-sm mb-3">"${w.text}"</p>
+                    <span class="font-mono text-xs text-rosegold">— ${w.name}</span>
+                </div>
+            `).join('');
+        }
+
+        function saveRSVP(e) {
+            e.preventDefault();
+            const name = document.getElementById('guestName').value;
+            const msg = document.getElementById('guestMsg').value || "Congratulations!";
+
+            const wishes = JSON.parse(localStorage.getItem('aditi_atharv_wishes')) || [];
+            wishes.unshift({ name, text: msg });
+            localStorage.setItem('aditi_atharv_wishes', JSON.stringify(wishes));
+
+            loadWishes();
+            alert("RSVP submitted successfully!");
+            document.getElementById('rsvpForm').reset();
+        }
+
+        // Lightbox Control
+        function openLightbox(src) {
+            document.getElementById('lightboxImg').src = src;
+            document.getElementById('lightbox').classList.remove('hidden');
+        }
+        function closeLightbox() {
+            document.getElementById('lightbox').classList.add('hidden');
+        }
+
+        // Calendar Event Link Generator
+        function addGoogleCal(title, loc, dateIso) {
+            const d = dateIso.replace(/-|:|\.\d\d\d/g, "");
+            const url = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${d}/${d}&location=${encodeURIComponent(loc)}`;
+            window.open(url, '_blank');
+        }
+
+        // Settings Modal Handlers
+        function openSettingsModal() { document.getElementById('settingsModal').classList.remove('hidden'); }
+        function closeSettingsModal() { document.getElementById('settingsModal').classList.add('hidden'); }
+
+        function saveDetails() {
+            config.bride = document.getElementById('editBride').value || "Aditi";
+            config.groom = document.getElementById('editGroom').value || "Atharv";
+            config.date = document.getElementById('editDate').value || "2027-01-29";
+            config.time = document.getElementById('editTime').value || "12:00 PM";
+            config.venue = document.getElementById('editVenue').value || "Akot";
+
+            document.getElementById('dispBride').innerText = config.bride;
+            document.getElementById('dispGroom').innerText = config.groom;
+            document.getElementById('dispVenueHeader').innerText = `${config.venue.toUpperCase()}, MAHARASHTRA`;
+
+            updateCountdown();
+            closeSettingsModal();
+        }
+
+        // Initialization
+        window.onload = function() {
+            loadStoredCustomPhotos();
+            loadWishes();
+        };
+    </script>
+</body>
+</html>
